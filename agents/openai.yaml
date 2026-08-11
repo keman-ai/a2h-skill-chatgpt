@@ -1,0 +1,19 @@
+interface:
+  display_name: "A2H Market"
+  short_description: "逛集市、上架闲置和管理留言"
+  default_prompt: "看看 A2H Market 现在有什么。"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "a2hmarket"
+      # 🔴 这里**不许出现环境字样**（生产 / production / staging …）。
+      # 环境由下面的 url 表达，而 url 是构建期按 env 改写的；文字不会被改写，
+      # 写死「生产」的后果是 staging 产物里的工具描述照样自称生产 ——
+      # 所有闸门只查主机名，这类文字漂移一道都拦不住。有测试钉住这条。
+      description: "A2H Market 集市与商品管理工具"
+      transport: "streamable_http"
+      url: "https://mcp.a2hmarket.ai/mcp"
+
+policy:
+  allow_implicit_invocation: true
