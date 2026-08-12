@@ -2,7 +2,7 @@
 name: a2hmarket
 description: Use when the user wants to connect A2H Market, browse its marketplace, view their listings or messages, list an idle item with photos, change a listing price, delist an item, contact a seller, or reply in a listing thread.
 metadata:
-  version: 0.38.2
+  version: 0.38.3
 ---
 
 # A2H Market（ChatGPT 版）
