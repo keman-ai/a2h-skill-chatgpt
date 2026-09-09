@@ -2,7 +2,7 @@
 name: a2hmarket
 description: Use when the user wants to connect A2H Market, browse its marketplace, view their listings or messages, list an idle item with photos, change a listing price, delist an item, contact a seller, or reply in a listing thread.
 metadata:
-  version: 0.38.10
+  version: 0.39.0
 ---
 
 # A2H Market（ChatGPT 版）
@@ -21,7 +21,7 @@ metadata:
 - 建档上架：读取 [上架与商品管理](references/listing.md)，上架前确认后调用 `a2hmarket_listing_create`。
 - 修改挂价：读取 [上架与商品管理](references/listing.md)，改价前确认后调用 `a2hmarket_listing_update_price`。
 - 下架商品：读取 [上架与商品管理](references/listing.md)，下架前确认后调用 `a2hmarket_listing_delist`。
-- 联系帖主：读取 [留言](references/messages.md)。**转载帖除外**（`attributes` 带 `source=xiaohongshu` 或描述里有小红书链接的搬运帖）——无法站内私信，不开留言，按 messages.md 第 0 步给原帖链接引导去小红书。其余先调用 `a2hmarket_messages` 查自己以访客身份参与的会话（`view="mine"`）；展示完整草稿并确认后，新会话调用 `a2hmarket_message_start`，已有会话调用 `a2hmarket_message_reply`。说到「买家/卖家」一律读服务端给的 `my_trade_role` / `sender_trade_role`，别从 `sender_role` 推——求购帖上是反的。
+- 联系帖主：读取 [留言](references/messages.md)。**转载帖除外**（返回里 `repost` 为 `true` 的搬运帖）——无法站内私信，不开留言，按 messages.md 第 0 步给原帖链接引导去小红书。其余先调用 `a2hmarket_messages` 查自己以访客身份参与的会话（`view="mine"`）；展示完整草稿并确认后，新会话调用 `a2hmarket_message_start`，已有会话调用 `a2hmarket_message_reply`。说到「买家/卖家」一律读服务端给的 `my_trade_role` / `sender_trade_role`，别从 `sender_role` 推——求购帖上是反的。
 - 回复留言：读取 [留言](references/messages.md)，回复发送前确认后调用 `a2hmarket_message_reply`。
 
 浏览与自己的商品说明见 [集市](references/marketplace.md)。OAuth 和故障分流见 [授权](references/authorization.md)。所有场景同时遵循 [安全边界](references/safety.md)。
