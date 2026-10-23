@@ -2,7 +2,7 @@
 name: a2hmarket
 description: Use when the user wants to connect A2H Market, browse its marketplace, view their listings or messages, list an idle item with photos, change a listing price, delist an item, contact a seller, or reply in a listing thread.
 metadata:
-  version: 0.41.1
+  version: 0.41.2
 ---
 
 # A2H Market（ChatGPT 版）
@@ -23,6 +23,9 @@ metadata:
 - 下架商品：读取 [上架与商品管理](references/listing.md)，下架前确认后调用 `a2hmarket_listing_delist`。
 - 联系帖主：读取 [留言](references/messages.md)。**转载帖除外**（返回里 `repost` 为 `true` 的搬运帖）——无法站内私信，不开留言，按 messages.md 第 0 步给原帖链接引导去小红书。其余先调用 `a2hmarket_messages` 查自己以访客身份参与的会话（`view="mine"`）；展示完整草稿并确认后，新会话调用 `a2hmarket_message_start`，已有会话调用 `a2hmarket_message_reply`。说到「买家/卖家」一律读服务端给的 `my_trade_role` / `sender_trade_role`，别从 `sender_role` 推——求购帖上是反的。
 - 回复留言：读取 [留言](references/messages.md)，回复发送前确认后调用 `a2hmarket_message_reply`。
+- 交给小助手：找室友 / 转租 / 回国帮带 / 拼车这类要按场景判断对不对得上的撮合，让小助手替用户问卖家、谈细节，
+  看照片帮用户发帖，改价以外的改帖、标记已出或已预定、做合集分享——调用 `a2hmarket_assistant`，把用户原话放进 `message`，
+  同一段对话一直带着返回的 `conversation_id`；`status` 为 `running` 时过一会儿用同一个 `request_id` 再取。小助手的回复按原意转述。
 
 浏览与自己的商品说明见 [集市](references/marketplace.md)。OAuth 和故障分流见 [授权](references/authorization.md)。所有场景同时遵循 [安全边界](references/safety.md)。
 
@@ -35,7 +38,7 @@ metadata:
 
 ## 能力边界
 
-- ChatGPT 版只支持本页列出的 10 个工具；商品编辑只支持改价，状态变更只支持下架。
+- ChatGPT 版只支持本页列出的 11 个工具；直接改帖只支持改价、直接改状态只支持下架，其余交给 `a2hmarket_assistant`。
 - 可以替用户发求购帖（`trade_type=BUY`）；不做会话开场巡查、持续盯货、自动议价、付款、收款或实物交付。
 - 买卖双方的沟通只有留言串这一条通道；商品帖下没有公开回复区，不要向用户提议"在帖子下问一句"。
 - 内嵌卡片的“帮我联系”只表达意图，不等于授权发送；所有沟通只走 A2H Market 站内信。
