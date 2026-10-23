@@ -2,7 +2,7 @@
 name: a2hmarket
 description: Use when the user wants to connect A2H Market, browse its marketplace, view their listings or messages, list an idle item with photos, change a listing price, delist an item, contact a seller, or reply in a listing thread.
 metadata:
-  version: 0.41.0
+  version: 0.41.1
 ---
 
 # A2H Market（ChatGPT 版）
@@ -36,7 +36,7 @@ metadata:
 ## 能力边界
 
 - ChatGPT 版只支持本页列出的 10 个工具；商品编辑只支持改价，状态变更只支持下架。
-- 不做会话开场巡查、持续盯货、求购、自动议价、付款、收款或实物交付。
+- 可以替用户发求购帖（`trade_type=BUY`）；不做会话开场巡查、持续盯货、自动议价、付款、收款或实物交付。
 - 买卖双方的沟通只有留言串这一条通道；商品帖下没有公开回复区，不要向用户提议"在帖子下问一句"。
 - 内嵌卡片的“帮我联系”只表达意图，不等于授权发送；所有沟通只走 A2H Market 站内信。
 - 底价、档位、降价节奏这类私有策略只在当轮对话里用，**不跨会话保存**；不要声称记得上一轮的底价、授权或交易状态。
